@@ -9,8 +9,8 @@ docker run --rm -it -p 60080:80 -p 60443:443 maldex/apache2_mod_evasive_proxy_ss
 - on Alpine, it exists with "AH02324: A resource shortage or other unrecoverable failure was encountered before any child process initialized successfully... httpd is exiting!"
 
 ## expectations
-- Upon hitting http://<host-ip>:60080, you should see an empty page titled "index of /" (default vhos config)
-- Upon hitting http://<host-ip>:60443, you should be presented with an Antarctic CA and Cert, and be weirdly redirected to a weird http-non-ssl site. (https->http redirect on default-vhost)
+- Upon hitting http://host-ip:60080, you should see an empty page titled "index of /" (default vhos config)
+- Upon hitting http://host-ip:60443, you should be presented with an Antarctic CA and Cert, and be weirdly redirected to a weird http-non-ssl site. (https->http redirect on default-vhost)
 
 ## issue
 running this on a (virtual machine) with (Alpine Linux Docker installation)[http://gitlab.gebaschtel.ch/Pub/installation-stuff/-/blob/master/os-base-installations/AlpineLinux-Manual.md] termintes with
