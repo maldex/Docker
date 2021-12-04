@@ -20,5 +20,5 @@ echo -e "\t\t\t]]]]]]]] list apache configuration [[[[[[[["
 httpd -S 
 
 echo -e "\t\t\t]]]]]]]] starting apache [[[[[[[["
-httpd -D FOREGROUND
+httpd -D FOREGROUND 
 exit $?

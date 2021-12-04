@@ -41,10 +41,10 @@ function apache_install_all() {
     sed -i 's/DOSHashTableSize .*/DOSHashTableSize 8193/g' conf.modules.d/mod_evasive.conf
     sed -i 's/DOSPageCount .*/DOSPageCount 10/g' conf.modules.d/mod_evasive.conf
     sed -i 's/DOSPageInterval .*/DOSPageInterval 1/g' conf.modules.d/mod_evasive.conf
-    sed -i 's/DOSSiteCount .*/DOSSiteCount 100/g' conf.modules.d/mod_evasive.conf
+    sed -i 's/DOSSiteCount .*/DOSSiteCount 110/g' conf.modules.d/mod_evasive.conf
     sed -i 's/DOSSiteInterval .*/DOSSiteInterval 1/g' conf.modules.d/mod_evasive.conf
     sed -i 's/DOSBlockingPeriod .*/DOSBlockingPeriod 3/g' conf.modules.d/mod_evasive.conf
-    #sed -i 's/#DOSSystemCommand .*/DOSSystemCommand "date +\%Y.\%m.\%d-\%H:\%M:\%S.\%N \%s >> /var/log/http/evasive.log"/g' conf.modules.d/mod_evasive.conf # TODO tofix
+    #sed -i 's/#DOSSystemCommand .*/DOSSystemCommand date \"+\%Y.\%m.\%d-\%H:\%M:\%S.\%N mod_evasive blocking \%s\"/g' conf.modules.d/mod_evasive.conf # TODO tofix
 
     echo ">>> function ${FUNCNAME[0]} done"
 }

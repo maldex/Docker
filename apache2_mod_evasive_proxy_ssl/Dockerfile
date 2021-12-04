@@ -20,9 +20,9 @@ RUN         /root/apache.functions.sh apache_enable_balancer
 RUN         /root/apache.functions.sh apache_enable_ssl
 COPY        httpd.conf /etc/httpd/conf/httpd.conf
 RUN         mkdir /etc/httpd/certs
-RUN         /root/CreateCert.sh --chdir -C AQ -ST 'Ross Archipelago' -L "Mt. Erebus" -O "Hephaestos Skunk Works" -OU "Cert Authority" -E hephaistos@olymp -CN Authority 
-RUN         /root/CreateCert.sh --chdir -C AQ -ST "Ross Archipelago" -L "Mt. Terror" -O "Gollum Jewlery Ltd." -OU "Smeagol's Dept." -E deagol@mordor -CA Authority -CN default
-RUN         /root/CreateCert.sh --chdir -C AQ -ST "Ross Archipelago" -L "Mt. Terror" -O "Hades Notary Inc." -OU "Plutus Accouting Dept." -E kerberos@styx -CA Authority -CN paperless \
+RUN         /root/CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Container" -L "Mt. Erebus" -O "Hephaestos Skunk Works" -OU "Cert Authority" -E hephaistos@olymp -CN Authority 
+RUN         /root/CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Container" -L "Mt. Terror" -O "Gollum Jewlery Ltd." -OU "Smeagol's Dept." -E deagol@mordor -CA Authority -CN default
+RUN         /root/CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Container" -L "Mt. Terror" -O "Hades Notary Inc." -OU "Plutus Accouting Dept." -E kerberos@styx -CA Authority -CN paperless \
                -AN paperless.intranet -AN paperless.internal -AN paperless.private -AN paperless.corp -AN paperless.home -AN paperless.lan -AN paperless.local
                     
 # assume persistent storage
