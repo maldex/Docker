@@ -120,6 +120,10 @@ EOF
             shift; chown="$1"
             shift; continue
             ;;
+        "--chmod")
+            shift; chmod="$1"
+            shift; continue
+            ;;
         *)
             echo "unknown option '$1'"
             help; exit 1
@@ -178,6 +182,13 @@ EOF
         log "chowning to ${chown}"
         chown ${chown} `pwd`/${commonName}.*
     fi
+    
+    # remod if required
+    if [ ! -z "${chown}" ]; then
+        log "chmoding to ${chown}"
+        chmod ${chown} `pwd`/${commonName}.*
+    fi
+    
     
     # display generated files
     md5sum `pwd`/${commonName}.key `pwd`/${commonName}.crt
