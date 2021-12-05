@@ -1,4 +1,4 @@
-# Alpine installation quick-instructions
+# Alpine installation quick-instructions - COPY_OF_20211204.md)
 
 ## Basic Installation onto a x64_86 Virtual Machine
 Alpine Linux is very limited in terms of hardware- and bare-metal-support. Para-Virtual Disk and Network adapters are known to work, other hardware is not known.
@@ -92,41 +92,8 @@ rc-update add docker boot
 service docker start
 ```
 
-### install samba natively
-```
-MyPass=rootroot
-MyUser=root
-mv /etc/samba/smb.conf /etc/samba/smb.conf.org
-echo "# simple samba server
-[global]
-        workgroup = arbeitsuppe
-        server string = Samba Server V.%v on %h
-        # hide dot-files
-        veto files = /.*
-        delete veto files = No
-        security = user
-        passdb backend = tdbsam
-        load printers = no
-        cups options = raw
-        acl group control = Yes
-        create mask = 02660
-        directory mask = 02770
-        force user = root
-[Data]
-        comment = Data-Directory
-        path = /srv/Data
-        browseable = yes
-        writable = yes
-" > /etc/samba/smb.conf
-echo -ne "${MyPass}\n${MyPass}\n" | smbpasswd -a -s ${MyUser}
-smbpasswd -e ${MyUser}
-
-rc-update add samba
-rc-service samba restart
-```
-
 ---
-## management topics
+## management topics - if required
 
 ### set a fixed IP
 - edit your `/etc/resolv.conf` and add some _nameserver 8.8.4.4_
