@@ -93,7 +93,6 @@ docker run --rm -it \
 ### publish image
 ```bash
 docker image tag ${image}:${tag} ${image}:latest
-docker push ${image}:${tag} ${image}:latest
 docker push ${image}:${tag}
 docker push ${image}:latest
 ```

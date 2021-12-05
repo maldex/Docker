@@ -68,7 +68,8 @@ function apache_minimum_modules() {
     sed -i '/^#;/!s/^/#;/' conf.modules.d/*
           
     echo ">>> re-enable MPM and CGI" # essentially re-enabling basic apache functionality
-    sed -i 's/^#;//' conf.modules.d/00-mpm.conf
+    #sed -i 's/^#;//' conf.modules.d/00-mpm.conf
+    echo "LoadModule mpm_prefork_module modules/mod_mpm_prefork.so" >> conf.modules.d/00-mpm.conf
     sed -i 's/^#;//' conf.modules.d/01-cgi.conf
     sed -i 's/^#;//' conf.modules.d/mod_evasive.conf
      
