@@ -184,9 +184,9 @@ EOF
     fi
     
     # remod if required
-    if [ ! -z "${chown}" ]; then
-        log "chmoding to ${chown}"
-        chmod ${chown} `pwd`/${commonName}.*
+    if [ ! -z "${chmod}" ]; then
+        log "chmoding to ${chmod}"
+        chmod ${chmod} `pwd`/${commonName}.*
     fi
     
     
