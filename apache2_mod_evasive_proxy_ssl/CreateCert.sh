@@ -62,6 +62,7 @@ EOF
 
     log "parsing arguments"
     days=3650
+    chown=""
     while [ "$1" != "" ]; do
     case "$1" in
         "--help"|"-?")
@@ -113,6 +114,11 @@ EOF
             ;;
         "--chdir")
             shift; cd /etc/httpd/certs
+            continue
+            ;;
+        "--chown")
+            shift; chown="$1"
+            shift; continue
             ;;
         *)
             echo "unknown option '$1'"
@@ -167,6 +173,13 @@ EOF
     # cleanup
     rm ${commonName}.key.pass ${commonName}.csr ${commonName}.cnf
     
+    # reown if required
+    if [ ! -z "${chown}" ]; then
+        log "chowning to ${chown}"
+        chown ${chown} `pwd`/${commonName}.*
+    fi
+    
+    # display generated files
     md5sum `pwd`/${commonName}.key `pwd`/${commonName}.crt
     
 }

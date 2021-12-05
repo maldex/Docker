@@ -29,14 +29,14 @@ docker run --rm -it \
 ```bash
 mkdir certs/
 
-docker run --rm -it -v ${PWD}/certs:/etc/httpd/certs ${image}:${tag} \
-    /root/CreateCert.sh --chdir -C AQ -ST "Ross Archipelago" -L "Mt. Erebus" -O "Hephaestos Skunk Works" -OU "Cert Authority" -E hephaistos@olymp -CN Authority 
+docker run --user $(id -u):$(id -g) --rm -it -v ${PWD}/certs:/etc/httpd/certs ${image}:${tag} \
+    /CreateCert.sh --chdir -C AQ -ST "Ross Archipelago" -L "Mt. Erebus" -O "Hephaestos Skunk Works" -OU "Cert Authority" -E hephaistos@olymp -CN Authority 
     
-docker run --rm -it -v ${PWD}/certs:/etc/httpd/certs ${image}:${tag} \
-    /root/CreateCert.sh --chdir -C AQ -ST "Ross Archipelago" -L "Mt. Terror" -O "Gollum Jewlery Ltd." -OU "Smeagol's Dept." -E deagol@mordor -CA Authority -CN default
+docker run --user $(id -u):$(id -g) --rm -it -v ${PWD}/certs:/etc/httpd/certs ${image}:${tag} \
+    /CreateCert.sh --chdir -C AQ -ST "Ross Archipelago" -L "Mt. Terror" -O "Gollum Jewlery Ltd." -OU "Smeagol's Dept." -E deagol@mordor -CA Authority -CN default
     
-docker run --rm -it -v ${PWD}/certs:/etc/httpd/certs ${image}:${tag} \
-    /root/CreateCert.sh --chdir -C AQ -ST "Ross Archipelago" -L "Mt. Terror" -O "Hades Notary Inc." -OU "Plutus Accouting Dept." -E kerberos@styx -CA Authority -CN paperless \
+docker run --user $(id -u):$(id -g) --rm -it -v ${PWD}/certs:/etc/httpd/certs ${image}:${tag} \
+    /CreateCert.sh --chdir -C AQ -ST "Ross Archipelago" -L "Mt. Terror" -O "Hades Notary Inc." -OU "Plutus Accouting Dept." -E kerberos@styx -CA Authority -CN paperless \
     -AN paperless.intranet -AN paperless.internal -AN paperless.private -AN paperless.corp -AN paperless.home -AN paperless.lan -AN paperless.local
     
 ls -lah certs/
@@ -58,4 +58,20 @@ docker run --rm -it \
 docker image tag ${image}:${tag} ${image}:latest
 docker push ${image}:${tag}
 docker push ${image}:latest
+```
+
+```
+function recreate() {
+tag=`date +%Y%m%d`
+image="maldex/apache2_mod_evasive_proxy_ssl"
+
+docker image rm ${image}:${tag}
+docker image rm ${image}:latest
+
+docker build -t ${image}:${tag} . 
+
+docker image tag ${image}:${tag} ${image}:latest
+docker push ${image}:${tag}
+docker push ${image}:latest
+}
 ```
