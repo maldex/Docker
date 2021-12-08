@@ -184,6 +184,8 @@ function apache_enable_proxy(){
     _apache_module_enabler proxy_module
     _apache_module_enabler proxy_http_module
     _apache_module_enabler proxy_html_module
+    _apache_module_enabler proxy_wstunnel_module
+
     echo ">>> placing demo-vhost into conf.d/vhost-simple-proxy.conf"
     echo "# sample vhost for simple proxy
 <VirtualHost *:80>
