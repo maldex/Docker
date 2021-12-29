@@ -8,10 +8,9 @@ echo -en "user '${user}'\t\t"; getent passwd ${user}
 echo -en "group '${group}'\t\t"; getent group ${group}
 echo -e "hostname\t\t${HOSTNAME}"
 
-echo -e "$0\t\t\t]]]]]]]] adjusting ServerName [[[[[[[["
-sed -i 's/^.#ServerName .*/ServerName ${HOSTNAME}/g' /etc/httpd/conf/httpd.conf
-sed -i 's/{HOSTNAME}/'${HOSTNAME}'/g' /var/www/html/index.html
-
+#echo -e "$0\t\t\t]]]]]]]] adjusting ServerName [[[[[[[["
+#sed -i 's/^.#ServerName .*/ServerName ${HOSTNAME}/g' /etc/httpd/conf/httpd.conf
+#sed -i 's/{HOSTNAME}/'${HOSTNAME}'/g' /var/www/html/index.html
 
 echo -e "$0\t\t\t]]]]]]]] list apache modules [[[[[[[["
 httpd -M
