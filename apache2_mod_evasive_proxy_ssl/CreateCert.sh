@@ -8,10 +8,9 @@ echo >&2 '
     -CN "woohsdf.com" -AN "more.asdf.com" -AN "6666.asdf.com" \
     -E "nobody@her.ee" --comment "thi s a comment"
     
-
-    
-./CreateCert.sh -C AQ -ST "Ross Ice Shelf" -L "Mt. Terror" -O "Self Signer" -OU "Cert Auth." -E just@some.penguins -CN Authority
-./CreateCert.sh -C AQ -ST "Ross Ice Shelf" -L "Mt. Erebus" -O "Self Signer" -OU "Cert Users" -E even@more.penguins -CN default -CA Authority
+  ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Landfill" -L "Mt. Erebus" -O "Hephaestos Skunk Works" -OU "Cert Authority" -E hephaistos@olymp -CN Authority 
+  ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Dump" -L "Mt. Terror" -O "Gollum Jewlery Ltd." -OU "Smeagol's Dept." -E deagol@mordor -CA Authority -CN default
+  ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Dump" -L "Mt. Terror" -O "Hades Notary Inc." -OU "Plutus Accouting Dept." -E kerberos@styx -CA Authority -CN paperless \
 '
     }
     
@@ -22,9 +21,9 @@ function log() {
     log "create openssl config template"
     cat << EOF > /tmp/out.cnf
 [ req ]
-default_bits        = 2048
-default_md          = sha256
-default_keyfile     = drone-ci-web.company.com.key.pem
+default_bits        = 4096
+default_md          = sha512
+default_keyfile     = whatever.company.com.key.pem
 distinguished_name  = subject
 req_extensions      = req_ext
 x509_extensions     = x509_ext
