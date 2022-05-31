@@ -11,7 +11,7 @@ echo >&2 '
   ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Landfill" -L "Mt. Erebus" -O "Hephaestos Skunk Works" -OU "Cert Authority" -E hephaistos@olymp -CN Authority 
   ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Dump" -L "Mt. Terror" -O "Gollum Jewlery Ltd." -OU "Smeagol's Dept." -E deagol@mordor -CA Authority -CN default
   ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Dump" -L "Mt. Terror" -O "Hades Notary Inc." -OU "Plutus Accouting Dept." -E kerberos@styx -CA Authority -CN paperless \
-'
+ -AN paperless.intranet -AN paperless.internal -AN paperless.private -AN paperless.corp -AN paperless.home -AN paperless.lan -AN paperless.local'
     }
     
 function log() {
