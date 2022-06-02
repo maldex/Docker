@@ -1,19 +1,11 @@
 #!/bin/bash
 
+# ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Landfill" -L "Mt. Erebus" -O "Hephaestos Skunk Works" -OU "Cert Authority" -E hephaistos@olymp -CN Authority 
+# ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Dump" -L "Mt. Terror" -O "Gollum Jewlery Ltd." -OU "Smeagol's Dept." -E deagol@mordor -CA Authority -CN default
+# ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Dump" -L "Mt. Terror" -O "Dionysus Logistics Inc." -OU "Epimenides ACME Dept." -E complain@no.where -CA Authority -CN gitea 
+# ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Dump" -L "Mt. Terror" -O "Hades Notary Inc." -OU "Plutus Accouting Dept." -E kerberos@styx -CA Authority -CN paperless
+
 function CreateCert() {
-    function help() {
-echo >&2 '
-./CreateCert.sh -C US -ST soviet -L London \
-    -O "bad guys inc" -OU "Bad Certs" \
-    -CN "woohsdf.com" -AN "more.asdf.com" -AN "6666.asdf.com" \
-    -E "nobody@her.ee" --comment "thi s a comment"
-    
-  ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Landfill" -L "Mt. Erebus" -O "Hephaestos Skunk Works" -OU "Cert Authority" -E hephaistos@olymp -CN Authority 
-  ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Dump" -L "Mt. Terror" -O "Gollum Jewlery Ltd." -OU "Smeagol's Dept." -E deagol@mordor -CA Authority -CN default
-  ./CreateCert.sh --chdir -C AQ -ST "Ross Archipelago - McMurdo Dump" -L "Mt. Terror" -O "Hades Notary Inc." -OU "Plutus Accouting Dept." -E kerberos@styx -CA Authority -CN paperless \
- -AN paperless.intranet -AN paperless.internal -AN paperless.private -AN paperless.corp -AN paperless.home -AN paperless.lan -AN paperless.local'
-    }
-    
 function log() {
     echo " >>> $@ <<<"
     }
@@ -112,7 +104,7 @@ EOF
             shift; continue
             ;;
         "--chdir")
-            shift; cd /etc/httpd/certs
+            shift; mkdir /etc/httpd/certs 2>/dev/null; cd /etc/httpd/certs
             continue
             ;;
         "--chown")
@@ -165,9 +157,9 @@ EOF
 
     log "create the cert"
     if [ -z "${authority}" ]; then
-        openssl x509 -req -sha256 -days ${days} -in ${commonName}.csr -signkey ${commonName}.key -out ${commonName}.crt 
+        openssl x509 -req -sha512 -days ${days} -in ${commonName}.csr -signkey ${commonName}.key -out ${commonName}.crt 
     else
-        openssl x509 -req -sha256 -days ${days} -in ${commonName}.csr -signkey ${commonName}.key -out ${commonName}.crt -CA ${authority}.crt -CAkey ${authority}.key -CAcreateserial
+        openssl x509 -req -sha512 -days ${days} -in ${commonName}.csr -signkey ${commonName}.key -out ${commonName}.crt -CA ${authority}.crt -CAkey ${authority}.key -CAcreateserial
     fi
     
     # openssl x509 -in certificate.crt -text -noout
