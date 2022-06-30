@@ -14,7 +14,7 @@ function log() {
     cat << EOF > /tmp/out.cnf
 [ req ]
 default_bits        = 4096
-default_md          = sha512
+default_md          = AES-256-CBC
 default_keyfile     = whatever.company.com.key.pem
 distinguished_name  = subject
 req_extensions      = req_ext
